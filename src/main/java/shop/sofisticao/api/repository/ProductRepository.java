@@ -1,12 +1,9 @@
 package shop.sofisticao.api.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 import shop.sofisticao.api.entity.Product;
-
+import java.util.List;
 public interface ProductRepository extends MongoRepository<Product, String> {
 
-    @Query("{name:'?0'}")
-    Product findItemByName(String name);
-
+    List<Product> findByNameContaining(String name);
 }
