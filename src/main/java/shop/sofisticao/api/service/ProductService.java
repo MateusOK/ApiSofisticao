@@ -15,4 +15,6 @@ public interface ProductService {
 
     ProductResponseDto findProductById(String id);
 
+    void deleteProductById(String id);
+
 }

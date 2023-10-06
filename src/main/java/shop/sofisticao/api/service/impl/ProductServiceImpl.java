@@ -10,6 +10,7 @@ import shop.sofisticao.api.service.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +29,9 @@ public class ProductServiceImpl implements ProductService {
         var products = new ArrayList<ProductResponseDto>();
         response.forEach(product -> products.add(new ProductResponseDto(product)));
 
-        if (products.isEmpty()){
-            throw new RuntimeException("no products found with this name");
-        }
-        return products;
+        Optional<List<ProductResponseDto>> optionalProducts = Optional.ofNullable(products);
+
+        return optionalProducts.orElseThrow(() -> new RuntimeException("no products found"));
     }
 
     @Override
@@ -39,7 +39,6 @@ public class ProductServiceImpl implements ProductService {
         var response = productRepository.findAll();
         var products = new ArrayList<ProductResponseDto>();
         response.forEach(product -> products.add(new ProductResponseDto(product)));
-
         if (products.isEmpty()){
             throw new RuntimeException("no products found");
         }
@@ -51,5 +50,10 @@ public class ProductServiceImpl implements ProductService {
         var product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("product not found with id: " + id));
         return new ProductResponseDto(product);
+    }
+
+    @Override
+    public void deleteProductById(String id){
+        productRepository.deleteById(id);
     }
 }
