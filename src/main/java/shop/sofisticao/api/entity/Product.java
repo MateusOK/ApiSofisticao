@@ -22,14 +22,16 @@ public class Product {
     private String name;
     private BigDecimal price;
     private BigDecimal priceDesc;
-    private List<Cores> cores;
-    private List<Porte> porte;
+    private List<Cores> colors;
+    private List<Porte> size;
+    private String image;
 
     public Product(ProductRequestDto request) {
         this.name = request.name();
         this.price = request.price();
         this.priceDesc = request.priceDesc();
-        this.cores = request.cores();
-        this.porte = request.porte();
+        this.colors = request.colors();
+        this.size = request.size();
+        this.image = request.image();
     }
 }

@@ -10,7 +10,8 @@ public record ProductRequestDto(
         String name,
         BigDecimal price,
         BigDecimal priceDesc,
-        List<Cores> cores,
-        List<Porte> porte
+        List<Cores> colors,
+        List<Porte> size,
+        String image
 ) {
 }

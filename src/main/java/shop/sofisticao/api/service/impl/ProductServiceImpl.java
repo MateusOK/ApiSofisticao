@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import shop.sofisticao.api.dto.request.ProductRequestDto;
 import shop.sofisticao.api.dto.response.ProductResponseDto;
 import shop.sofisticao.api.entity.Product;
+import shop.sofisticao.api.exception.ProductNotFoundException;
 import shop.sofisticao.api.repository.ProductRepository;
 import shop.sofisticao.api.service.ProductService;
 
@@ -55,5 +56,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProductById(String id){
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public ProductResponseDto saveImage(String id, String url){
+        Product receitaExistente = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+        receitaExistente.setImage(url);
+        return new ProductResponseDto(productRepository.save(receitaExistente));
     }
 }

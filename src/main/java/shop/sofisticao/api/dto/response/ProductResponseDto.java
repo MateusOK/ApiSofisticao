@@ -12,8 +12,9 @@ public record ProductResponseDto(
         String name,
         BigDecimal price,
         BigDecimal priceDesc,
-        List<Cores> cores,
-        List<Porte> porte
+        List<Cores> colors,
+        List<Porte> size,
+        String image
 ) {
     public ProductResponseDto(Product response){
         this(
@@ -21,8 +22,9 @@ public record ProductResponseDto(
                 response.getName(),
                 response.getPrice(),
                 response.getPriceDesc(),
-                response.getCores(),
-                response.getPorte()
+                response.getColors(),
+                response.getSize(),
+                response.getImage()
         );
     }
 }
